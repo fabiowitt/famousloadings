@@ -1,4 +1,4 @@
-define('SquareLoadingView', function (require, exports, module) {
+define('CircleLoadingView', function (require, exports, module) {
     var View = require('famous/core/View');
     var Modifier = require('famous/core/Modifier');
     var Transform = require('famous/core/Transform');
@@ -10,20 +10,20 @@ define('SquareLoadingView', function (require, exports, module) {
     var angleX = new Transitionable(0);
     var angleY = new Transitionable(0);
 
-    function SquareLoading(options) {
+    function CircleLoading(options) {
         View.apply(this, arguments);
 
         _createBody.call(this);
 
-        rotate();
+        start();
     }
-    SquareLoading.prototype = Object.create(View.prototype);
-    SquareLoading.prototype.constructor = SquareLoading;
+    CircleLoading.prototype = Object.create(View.prototype);
+    CircleLoading.prototype.constructor = CircleLoading;
 
-    SquareLoading.DEFAULT_OPTIONS = {
+    CircleLoading.DEFAULT_OPTIONS = {
     };
 
-    function rotate() {
+    function start() {
         angleX.set(0 * (Math.PI / 180), { duration: 0 });
         angleY.set(0 * (Math.PI / 180), { duration: 0 });
         angleX.set(-180 * (Math.PI / 180),
@@ -38,17 +38,18 @@ define('SquareLoadingView', function (require, exports, module) {
                         curve: Easing.outQuad
                     },
                     function () {
-                        rotate();
+                        start();
                     });
             });
 
     };
 
     function _createBody() {
-        var square = new Surface({
+        var circle = new Surface({
             size: [50, 50],
             properties: {
-                backgroundColor: 'orange'
+                backgroundColor: 'orange',
+                borderRadius : '50%'
             },
             classes: ['backfaceVisibility']
         });
@@ -63,8 +64,10 @@ define('SquareLoadingView', function (require, exports, module) {
             }
         });
 
-        this.add(centerSpinModifier).add(square);
+        this.add(centerSpinModifier).add(circle);
     }
 
-    module.exports = SquareLoading;
-});
+    module.exports = CircleLoading;
+});/**
+ * Created by fabiowitt on 10/21/14.
+ */

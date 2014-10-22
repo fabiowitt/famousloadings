@@ -7,10 +7,17 @@ define(function (require, exports, module) {
     var SequentialLayout = require('famous/views/SequentialLayout');
     var Scrollview = require("famous/views/Scrollview");
     var SquareLoadingView = require('./SquareLoadingView');
+    var CircleLoadingView = require('./CircleLoadingView');
+    var CircleScaleLoadingView = require('./CircleScaleLoadingView');
 
     var mainContext = Engine.createContext();
 
-    var squareLoading = new SquareLoadingView();
+//    var loading = new SquareLoadingView();
+//    mainContext.add(loading);
 
-    mainContext.add(squareLoading);
+//    var loading = new CircleLoadingView();
+//    mainContext.add(loading);
+
+    var loading = new CircleScaleLoadingView();
+    mainContext.add(loading);
 });
